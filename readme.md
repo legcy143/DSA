@@ -5,4 +5,4 @@
   - queue 
   - tree
   - graph 
-  - dp 
+  - dynamic programming(dp) 
