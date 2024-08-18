@@ -55,7 +55,7 @@ void LevelTraversing(Node *root)
         }
         else
         {
-            std::cout<< temp->data << "  " ;
+            std::cout << temp->data << "  ";
             if (temp->left)
             {
                 TreeQueue.push(temp->left);
@@ -68,20 +68,58 @@ void LevelTraversing(Node *root)
     }
 }
 
+// In order traversal
+void InOrderTraversal(Node *root)
+{
+    // std::cout << "\n In - Order Traversing in Tree \n";
+    if (root == nullptr)
+        return;
+    InOrderTraversal(root->left);
+    std::cout << root->data << " ";
+    InOrderTraversal(root->right);
+}
+
+// pre order traversal
+void PreOrderTraversal(Node *root)
+{
+    if (root == nullptr)
+        return;
+    std::cout << root->data << " ";
+    PreOrderTraversal(root->left);
+    PreOrderTraversal(root->right);
+}
+
+// post order traversal
+void PostOrderTraversal(Node *root)
+{
+    if (root == nullptr)
+        return;
+    PostOrderTraversal(root->left);
+    PostOrderTraversal(root->right);
+    std::cout << root->data << " ";
+}
+
 int main()
 {
 
     std::cout << "har har maahdev\n";
     Node *root = nullptr;
     std::cout << root << std::endl;
-    // input 5 6 3 -1 -1 1 -1 -1 7 6 -1 -1 2 -1 -1
+    // tree 5 6 3 -1 -1 1 -1 -1 7 6 -1 -1 2 -1 -1
     /*
             5
        6   - -   7
     3 - 1 - - 6 - 2
     */
 
-    BuildTree(root);
-    LevelTraversing(root);
+    BuildTree(root);       // input -> 5 6 3 -1 -1 1 -1 -1 7 6 -1 -1 2 -1 -1
+    LevelTraversing(root); // output -> 5 / 6 7 / 3 1 6 2
+    std::cout << "\n In - Order Traversing in Tree \n";
+    InOrderTraversal(root); // output -> 3 6 1 5 6 7 2
+    std::cout << "\n Pre - Order Traversing in Tree\n";
+    PreOrderTraversal(root); // output -> 5 6 3 1 7 6 2
+    std::cout << "\n Post - Order Traversing in Tree\n";
+    PostOrderTraversal(root); // output -> 3 1 6 6 2 7 5
+
     return 0;
 }
