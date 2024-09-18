@@ -116,11 +116,44 @@ void InOrderTraversal(Node *root)
 // pre order traversal
 void PreOrderTraversal(Node *root)
 {
-    if (root == nullptr)
+    if (!root)
         return;
-    std::cout << root->data << " ";
-    PreOrderTraversal(root->left);
-    PreOrderTraversal(root->right);
+
+    std::stack<TNR> TreeNode;
+    std::queue<int> TreeData;
+
+    TreeNode.push(TNR(root));
+    while (!TreeNode.empty())
+    {
+        TNR &tempTNR = TreeNode.top();
+        Node *temp = tempTNR.node;
+
+        if (!tempTNR.left && !tempTNR.right)
+        {
+            TreeData.push(temp->data);
+        }
+
+        if (temp->left && !tempTNR.left)
+        {
+            tempTNR.leftChecked();
+            TreeNode.push(TNR(temp->left));
+        }
+        else if (temp->right && !tempTNR.right)
+        {
+            tempTNR.rightChecked();
+            TreeNode.push(TNR(temp->right));
+        }
+        else
+        {
+            TreeNode.pop();
+        }
+    }
+
+    while (!TreeData.empty())
+    {
+        std::cout << TreeData.front() << " ";
+        TreeData.pop();
+    }
 }
 
 // post order traversal
@@ -128,9 +161,33 @@ void PostOrderTraversal(Node *root)
 {
     if (root == nullptr)
         return;
-    PostOrderTraversal(root->left);
-    PostOrderTraversal(root->right);
-    std::cout << root->data << " ";
+    std::stack<TNR> TreeNode;
+    TreeNode.push(TNR(root));
+    while (!TreeNode.empty())
+    {
+        TNR &tempTNR = TreeNode.top();
+        Node *temp = tempTNR.node;
+        if (tempTNR.right && tempTNR.left)
+        {
+            std::cout << temp->data << " ";
+            TreeNode.pop();
+        }
+        else if (temp->left != nullptr && !tempTNR.left)
+        {
+            tempTNR.leftChecked();
+            TreeNode.push(TNR(temp->left));
+        }
+        else if (temp->right != nullptr && !tempTNR.right)
+        {
+            tempTNR.rightChecked();
+            TreeNode.push(TNR(temp->right));
+        }
+        else
+        {
+            tempTNR.leftChecked();
+            tempTNR.rightChecked();
+        }
+    }
 }
 
 int main()
@@ -148,12 +205,13 @@ int main()
 
     BuildTree(root);       // input -> 5 6 3 -1 -1 1 -1 -1 7 6 -1 -1 2 -1 -1
     LevelTraversing(root); // output -> 5 / 6 7 / 3 1 6 2
-    std::cout << "\n In - Order Traversing in Tree \n";
+    std::cout << "\nIn - Order Traversing in Tree \n -> ";
     InOrderTraversal(root); // output -> 3 6 1 5 6 7 2
-    std::cout << "\n Pre - Order Traversing in Tree\n";
+    std::cout << "\nPre - Order Traversing in Tree\n -> ";
     PreOrderTraversal(root); // output -> 5 6 3 1 7 6 2
-    std::cout << "\n Post - Order Traversing in Tree\n";
+    std::cout << "\nPost - Order Traversing in Tree\n -> ";
     PostOrderTraversal(root); // output -> 3 1 6 6 2 7 5
 
+    std::cout<<"\n\n*** END *** \n";
     return 0;
 }
