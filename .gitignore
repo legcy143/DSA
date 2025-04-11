@@ -1,4 +1,7 @@
+*
+!*.*
+!*/
 .vscode
-.rough
+*.rough.cpp
 *.exe
 /rough
