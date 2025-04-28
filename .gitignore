@@ -1,6 +1,7 @@
 *
 !*.cpp
-!.gitkeep
+!*.md
+!*.gitkeep
 !*/
 .vscode
 *.rough.cpp
