@@ -29,21 +29,35 @@ void AddToHead(int n, ListNode *&head)
     head = temp;
 }
 
-void insertAtEnd(int n, ListNode *&head)
+void AddToTail(int n, ListNode *&tail)
 {
-    ListNode *end = new ListNode(n);
-    ListNode *current = head;
+    ListNode *endNode = new ListNode(n);
+    tail->next = endNode;
+    tail = endNode;
+}
+
+void AddToPosition(int n, int pos, ListNode *&head)
+{
+    ListNode *newElem = new ListNode(n);
+    ListNode * current = head;
+    int currentIndex = 0;
     while (current)
     {
-        current = current->next;
+        currentIndex++;
     }
+    
+    
 }
 
 int main()
 {
     cout << "har har mahadev\n";
     ListNode *head = new ListNode(3);
+    ListNode *tail = head;
     AddToHead(8, head);
+    AddToTail(2, tail);
+    AddToTail(21, tail);
+    // AddToPosition(21, 5, head);
     PrintList(head);
     // IterationList(head);
 
