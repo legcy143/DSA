@@ -10,7 +10,7 @@ int recursiveFib(int n)
     return recursiveFib(n - 1) + recursiveFib(n - 2);
 }
 
-int tabulationFib(int n ){
+int loopFib(int n ){
     if(n<=0) return 0;
     if(n <=2) return 1;
 
@@ -32,10 +32,10 @@ int main()
     cout<<recursiveFib(2);
     cout<<recursiveFib(5);
     cout<<" \n tabulation fib\n";
-    cout<<tabulationFib(0);
-    cout<<tabulationFib(1);
-    cout<<tabulationFib(2);
-    cout<<tabulationFib(5);
+    cout<<loopFib(0);
+    cout<<loopFib(1);
+    cout<<loopFib(2);
+    cout<<loopFib(5);
 
     cout << " \n*** end ***\n ";
     return 0;
